@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Parallex scrolling</title>
+   
+     <style>
+	
+#home{
+	background:#09F url(pg1.jpg) 50% 0 repeat fixed;
+	min-height: 1000px;	
+	height:1000px;
+	margin:0 auto;
+	width:100%;
+	max-width: 1920px;
+	position:relative;
+}
+	
+
+	
+#about{
+	background:#09F url(pg2.jpg) 50% 0 repeat fixed;	
+	min-height: 1000px;	
+	height:1000px;
+	margin:0 auto;
+	width:100%;
+	max-width: 1920px;
+	position:relative;
+	-webkit-box-shadow: 0 0 50px rgba(0,0,0,0.8);
+	box-shadow: 0 0 50px rgba(0,0,0,0.8);
+}
+	
+	
+#home article{ 
+	  height: 458px; 
+	  position: absolute; 
+	  text-align: center; 
+	  top: 150px; 
+	  width: 100%; 
+	  color:white;
+}
+#about article{ 
+	  height: 458px; 
+	  position: absolute; 
+	  text-align: center; 
+	  top: 150px; 
+	  width: 100%; 
+	  color:white;
+}
+	
+		
+
+	
+
+	</style>
+    
+</head>
+<body>
+	<section id="home" data-type="background" data-speed="10">
+    	<article><h1>Home Content </h1><p>This is just a sample content for home</p></article>
+    </section>
+    <section id="about" data-type="background" data-speed="10">
+    <article><h1>About Content </h1>
+    <p>This is just a sample content for About! Just for page filler
+    
+    </p></article>
+    </section>
+     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script>
+	$(document).ready(function(){
+		var win = $(window); 
+    $('section[data-type="background"]').each(function(){
+        var $bgobj = $(this); // assigning the object
+     
+        win.scroll(function() {
+            var yPos = -( (win.scrollTop() - $bgobj.offset().top) / $bgobj.data('speed'));
+            
+            // Put together our final background position
+            var coords = '50% '+ yPos + 'px';
+ 			 console.log("yPos : " +yPos);
+			 console.log("coords : " + coords);
+            // Move the background
+            $bgobj.css({ backgroundPosition: coords });
+        }); 
+    });    
+}); 
+	</script>
+   
+</body>
+</html>

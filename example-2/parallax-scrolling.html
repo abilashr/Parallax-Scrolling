@@ -1,0 +1,105 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Parallax Scrolling</title>
+</head>
+
+<body>
+<ul class="parallax-container">
+  <li>
+    <div class="parallax-bg pg1"></div>
+  </li>
+   <li>
+    <div class="parallax-bg pg2"></div>
+  </li>
+   <li>
+    <div class="parallax-bg pg3"></div>
+  </li>
+   <li>
+    <div class="parallax-bg pg4"></div>
+  </li>
+</ul>
+
+<style>
+	html, body{
+		padding:0px;
+		margin:0px;
+	}
+	ul{
+		padding:0px;
+		margin:0px;
+		
+	}
+	ul li {
+		list-style:none;
+		height:600px;
+		overflow:hidden;
+	}
+	.parallax-background{
+		height:700px;
+	}
+	.pg1{
+		
+		background:url(images/img-1.png) 50% 120%;
+	
+	}
+	.pg2{
+		
+		background:url(images/img-2.png);
+	}
+	.pg3{
+		
+		background:url(images/img-3.png);
+	}
+	.pg4{
+		
+		background:url(images/img-4.png);
+	}
+</style>
+<script src="jquery.min-1.10.2.js"></script>
+<script>
+$(function(){
+	
+	var $container = $(".parallax-container");
+	var $divs = $container.find(".parallax-bg");
+	var scrolled = document.body;
+	var liHeight = $divs.eq(0).closest("li").height();
+	var diffHeight = $divs.eq(0).height() - liHeight;
+	
+	var i,li, div, offset, scrollpg, top;
+	
+	var render = function(){
+		top = scrolled.scrollTop;
+		//console.log("top : "+top);
+		for(i=0; i<$divs.length; i++){
+			
+			//get one div
+			div = $divs[i];
+			
+			//get the parent li
+			li = div.parentNode;
+			
+			//calculate offset top of div
+			offset = $(div).offset().top;
+			
+			//amount toscroll
+			scrollpg = Math.round(((top - offset) / liHeight) * diffHeight);
+			
+			//apply the scroll amount
+			div.style.webkitTransform = "translate3d(60px,"+scrollpg+"px,50px)";
+			
+		}
+	};
+	
+	(function loop(){
+		requestAnimationFrame(loop);
+		render();
+	})();
+	
+});
+</script>
+
+</body>
+
+</html>
